@@ -87,12 +87,16 @@ export const storage = {
   setActiveModule: (id: number) => setItem(KEYS.ACTIVE_MODULE, id),
 };
 
-export const getTodayISO = () => new Date().toISOString().split('T')[0];
+export const getTodayISO = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
 
-export const addDays = (isoDate: string, days: number) => {
-  const d = new Date(isoDate);
+export const addDays = (localIsoDate: string, days: number) => {
+  // Use a midday time to avoid timezone edge cases jumping days
+  const d = new Date(localIsoDate + 'T12:00:00');
   d.setDate(d.getDate() + days);
-  return d.toISOString().split('T')[0];
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 };
 
 export const generateUUID = () => {

@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppContext } from '@/lib/context';
 import { toast } from '@/lib/toast';
+import confetti from 'canvas-confetti';
 
 const STAGES = [
   { id: 1, name: 'Input Immersion', min: '60 min input logged', key: 'inputMinutes', target: 60 },
@@ -15,9 +16,10 @@ const STAGES = [
 ];
 
 export default function DailyPipeline() {
-  const { getTodaySession, updateTodaySession } = useAppContext();
+  const { getTodaySession, updateTodaySession, sessions } = useAppContext();
   const session = getTodaySession();
   const [sleepInput, setSleepInput] = useState('');
+  const [viewHistory, setViewHistory] = useState(false);
 
   const toggleStage = (stageId: number) => {
     const isComplete = session.pipelineStagesCompleted.includes(stageId);
@@ -37,17 +39,105 @@ export default function DailyPipeline() {
   const handleEndDay = () => {
     const hours = parseFloat(sleepInput);
     if (!isNaN(hours)) {
-      updateTodaySession({ sleepHours: hours });
-      toast('Day ended and sleep logged! Great work.');
+      const newStages = session.pipelineStagesCompleted.includes(7) 
+        ? session.pipelineStagesCompleted 
+        : [...session.pipelineStagesCompleted, 7];
+
+      updateTodaySession({ 
+        sleepHours: hours,
+        pipelineStagesCompleted: newStages
+      });
+
+      if (newStages.length >= 7) {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+        toast('INCREDIBLE! All daily stages complete. Day ended and sleep logged!');
+      } else {
+        toast('Day ended and sleep logged! Great work.');
+      }
       setSleepInput('');
     }
   };
 
+  if (viewHistory) {
+    // Sort descending by date
+    const history = [...sessions].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return (
+      <div className="space-y-6">
+        <header className="border-b border-zinc-800 pb-4 flex justify-between items-end">
+          <div>
+            <h2 className="text-3xl font-mono text-amber-500 font-bold mb-1">Pipeline History</h2>
+            <p className="text-slate-400">Past daily records.</p>
+          </div>
+          <button 
+            onClick={() => setViewHistory(false)}
+            className="text-slate-400 hover:text-slate-200 transition-colors"
+          >
+            ← Back to Today
+          </button>
+        </header>
+
+        <div className="space-y-4">
+          {history.length === 0 ? (
+            <p className="text-slate-400">No history available yet.</p>
+          ) : (
+            history.map((s) => (
+              <div key={s.id} className="bg-zinc-900 border border-zinc-800 p-5 rounded-xl space-y-2">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="font-mono text-lg text-amber-500">{new Date(s.date).toLocaleDateString()}</h3>
+                  <span className="text-sm font-mono bg-zinc-800 px-2 py-1 rounded text-slate-300">
+                    {s.pipelineStagesCompleted.length}/{STAGES.length} Stages
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                  <div>
+                    <span className="text-slate-500 block">Input</span>
+                    <span className="text-slate-300">{s.inputMinutes}m</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block">Output</span>
+                    <span className="text-slate-300">S:{s.speakingMinutes}m W:{s.writingMinutes}m</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block">Constructions</span>
+                    <span className="text-slate-300">{s.constructionsCaptured} Added</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block">Sleep</span>
+                    <span className="text-slate-300">{s.sleepHours ? s.sleepHours + 'h' : 'Not Logged'}</span>
+                  </div>
+                </div>
+                {s.sessionNotes && (
+                  <div className="mt-4 pt-4 border-t border-zinc-800">
+                    <span className="text-slate-500 block text-xs uppercase tracking-wider mb-1">Notes</span>
+                    <p className="text-slate-300 text-sm whitespace-pre-wrap">{s.sessionNotes}</p>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
-      <header className="border-b border-zinc-800 pb-4">
-        <h2 className="text-3xl font-mono text-amber-500 font-bold mb-1">Daily Pipeline</h2>
-        <p className="text-slate-400">Complete stages sequentially to maximize structural encoding.</p>
+      <header className="border-b border-zinc-800 pb-4 flex justify-between items-end">
+        <div>
+          <h2 className="text-3xl font-mono text-amber-500 font-bold mb-1">Daily Pipeline</h2>
+          <p className="text-slate-400">Complete stages sequentially to maximize structural encoding.</p>
+        </div>
+        <button 
+          onClick={() => setViewHistory(true)}
+          className="text-slate-400 hover:text-slate-200 transition-colors bg-zinc-900 px-4 py-2 border border-zinc-800 rounded-md"
+        >
+          History
+        </button>
       </header>
 
       <div className="space-y-4">
