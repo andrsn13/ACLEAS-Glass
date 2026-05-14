@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 
 const STAGES = [
   { id: 1, name: 'Input Immersion', min: '60 min input logged', key: 'inputMinutes', target: 60 },
@@ -37,7 +38,7 @@ export default function DailyPipeline() {
     const hours = parseFloat(sleepInput);
     if (!isNaN(hours)) {
       updateTodaySession({ sleepHours: hours });
-      alert('Day ended and sleep logged! Great work.');
+      toast('Day ended and sleep logged! Great work.');
       setSleepInput('');
     }
   };

@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 import { generateUUID, getTodayISO } from '@/lib/storage';
 import { AIConversation as AIType } from '@/lib/types';
 
@@ -73,7 +74,7 @@ export default function AIConversation() {
 
   const handleStart = async () => {
     if (!apiKey) {
-      alert("API Key missing! Please add it in Settings.");
+      toast("API Key missing! Please add it in Settings.");
       return;
     }
     
@@ -88,7 +89,7 @@ export default function AIConversation() {
       const response = await callGemini(getSystemPrompt(), []);
       setChatHistory([{ role: 'model', text: response }]);
     } catch (e: any) {
-      alert(`AI Error: ${e.message}`);
+      toast(`AI Error: ${e.message}`);
     }
     setIsLoading(false);
   };
@@ -106,7 +107,7 @@ export default function AIConversation() {
       const response = await callGemini(getSystemPrompt(), gHistory, userMsg);
       setChatHistory(prev => [...prev, { role: 'model', text: response }]);
     } catch (e: any) {
-      alert(`AI Error: ${e.message}`);
+      toast(`AI Error: ${e.message}`);
     }
     setIsLoading(false);
   };

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 
 export default function InputSession() {
   const { getTodaySession, updateTodaySession } = useAppContext();
@@ -26,7 +27,7 @@ export default function InputSession() {
       interval = setInterval(() => {
         setSeconds((s) => {
           if (predictionMode && (s + 1) % 300 === 0) { // Every 5 minutes
-            alert("Prediction Mode: Pause. Predict what will be said next. Then continue.");
+            toast("Prediction Mode: Pause. Predict what will be said next. Then continue.");
           }
           return s + 1;
         });
@@ -52,7 +53,7 @@ export default function InputSession() {
     setSeconds(0);
     setShowRating(false);
     setLocalNote('');
-    alert(`Logged ${minLogged} minutes of input.`);
+    toast(`Logged ${minLogged} minutes of input.`);
   };
 
   const formatTime = (totalSeconds: number) => {

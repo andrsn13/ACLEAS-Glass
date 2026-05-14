@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 
 export default function WeeklyReview() {
   const { weekly, setWeekly, sessions } = useAppContext();
@@ -43,7 +44,7 @@ export default function WeeklyReview() {
       deepSessionCompleted: false,
       deepSessionMinutes: 0
     });
-    alert('Weekly review saved.');
+    toast('Weekly review saved.');
   };
 
   return (

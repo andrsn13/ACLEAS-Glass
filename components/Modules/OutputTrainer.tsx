@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 
 export default function OutputTrainer() {
   const { getTodaySession, updateTodaySession, constructions } = useAppContext();
@@ -13,12 +14,12 @@ export default function OutputTrainer() {
   // Minimal state for logging
   const handleLogSpeak = (mins: number) => {
     updateTodaySession({ speakingMinutes: session.speakingMinutes + mins });
-    alert(`Logged ${mins} minutes of speaking.`);
+    toast(`Logged ${mins} minutes of speaking.`);
   };
 
   const handleLogWrite = (mins: number) => {
     updateTodaySession({ writingMinutes: session.writingMinutes + mins });
-    alert(`Logged ${mins} minutes of writing.`);
+    toast(`Logged ${mins} minutes of writing.`);
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 import { Construction, Card } from '@/lib/types';
 import { generateUUID, getTodayISO } from '@/lib/storage';
 
@@ -53,11 +54,11 @@ export default function ConstructionJournal() {
   const handleSave = () => {
     // Validation
     if (!formData.construction.trim().includes(' ')) {
-      alert("Warning: Single words are not constructions. Add context (e.g., 'despite the fact that...').");
+      toast("Warning: Single words are not constructions. Add context (e.g., 'despite the fact that...').");
       return;
     }
     if (!formData.personalSentence.trim()) {
-      alert("Personal sentence is mandatory.");
+      toast("Personal sentence is mandatory.");
       return;
     }
 

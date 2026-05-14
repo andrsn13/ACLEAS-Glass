@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAppContext } from '@/lib/context';
 import Sidebar from './Sidebar';
+import ToastContainer from './ToastContainer';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { isLoaded, profile } = useAppContext();
@@ -22,6 +23,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           {children}
         </div>
       </main>
+      <ToastContainer />
     </div>
   );
 }

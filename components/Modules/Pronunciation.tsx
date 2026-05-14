@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 
 const MINIMAL_PAIRS = [
   'ship / sheep', 'live / leave', 'it / eat', 'full / fool', 'pull / pool',
@@ -34,7 +35,7 @@ export default function Pronunciation() {
       shadowingMinutes: session.shadowingMinutes + minutes,
       sessionNotes: session.sessionNotes + `\nShadowing Log: ${minutes}m - Source: ${source}`
     });
-    alert(`Logged ${minutes}m of shadowing.`);
+    toast(`Logged ${minutes}m of shadowing.`);
     setSource('');
   };
 

@@ -64,29 +64,29 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setActiveModuleState(storage.getActiveModule());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setProfileState(storage.getProfile());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setConstructionsState(storage.getConstructions());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setCardsState(storage.getCards());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setSessionsState(storage.getSessions());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setErrorsState(storage.getErrors());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setWeeklyState(storage.getWeekly());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setConversationsState(storage.getConversations());
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setApiKeyState(storage.getApiKey());
 
     // Initialize or load streak
     const loadedStreak = storage.getStreak();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setStreakState(loadedStreak);
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setIsLoaded(true);
   }, []);
 

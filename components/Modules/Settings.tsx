@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
+import { toast } from '@/lib/toast';
 
 export default function Settings() {
   const { apiKey, setApiKey, profile, setProfile } = useAppContext();
   
   const [localKey, setLocalKey] = useState(apiKey);
   const [showKey, setShowKey] = useState(false);
+  const [confirmClear, setConfirmClear] = useState(false);
 
   const handleSaveProfile = (updates: Partial<typeof profile>) => {
     if (profile) {
@@ -16,10 +18,12 @@ export default function Settings() {
   };
 
   const handleClearData = () => {
-    const confirmText = prompt('This will physically delete all locally stored data. Type DELETE to confirm.');
-    if (confirmText === 'DELETE') {
+    if (confirmClear) {
       localStorage.clear();
       window.location.reload();
+    } else {
+      setConfirmClear(true);
+      setTimeout(() => setConfirmClear(false), 3000);
     }
   };
 
@@ -54,10 +58,10 @@ export default function Settings() {
                         localStorage.setItem(key, data[key]);
                     }
                 }
-                alert("Import successful. Application will reload.");
+                toast("Import successful. Application will reload.");
                 window.location.reload();
             } catch (err) {
-                alert("Invalid JSON file.");
+                toast("Invalid JSON file.");
             }
         };
         reader.readAsText(file);
@@ -178,7 +182,7 @@ export default function Settings() {
               onClick={handleClearData}
               className="bg-[#cf6679]/10 text-[#cf6679] border border-[#cf6679]/30 px-6 py-2 rounded-md font-bold hover:bg-[#cf6679]/20 transition-colors"
             >
-              Clear All Data & Reset App
+              {confirmClear ? "Click again to confirm DELETE" : "Clear All Data & Reset App"}
             </button>
         </div>
       </div>
