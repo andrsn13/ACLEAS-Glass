@@ -192,7 +192,7 @@ export default function AIConversation() {
 
             <button 
               onClick={handleStart}
-              className="ml-auto bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-2 rounded-lg font-bold hover:bg-amber-400 transition-colors"
+              className="ml-auto bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-2 rounded-lg font-bold transition-colors"
             >
               Start Connection
             </button>
@@ -226,7 +226,7 @@ export default function AIConversation() {
 
         {chatHistory.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[80%] rounded-2xl p-4 ${msg.role === 'user' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'bg-zinc-800 text-slate-200'}`}>
+            <div className={`max-w-[80%] rounded-2xl p-4 ${msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-zinc-800 text-slate-200'}`}>
               <p className="whitespace-pre-wrap font-sans">{msg.text}</p>
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function AIConversation() {
             <button 
               type="submit"
               disabled={isLoading || !inputText.trim()}
-              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 rounded-lg font-bold hover:bg-amber-400 transition-colors disabled:opacity-50"
+              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 rounded-lg font-bold transition-colors disabled:opacity-50"
             >
               Send
             </button>

@@ -142,7 +142,7 @@ export default function RetrievalReview() {
     
     return (
         <div className="text-center py-10 animate-in fade-in">
-          <div className={`inline-block p-6 rounded-xl border mb-6 ${isStrong ? 'bg-blue-600 hover:bg-blue-500/10 border-amber-500/30' : 'bg-zinc-900 border-zinc-800'}`}>
+          <div className={`inline-block p-6 rounded-xl border mb-6 ${isStrong ? 'bg-blue-500/10 border-amber-500/30' : 'bg-zinc-900 border-zinc-800'}`}>
             <h2 className="text-2xl font-mono text-amber-500 mb-2">Review Complete</h2>
             <div className="space-y-1 text-slate-300">
               <p>Cards Reviewed: {sessionStats.reviewed}</p>
@@ -160,7 +160,7 @@ export default function RetrievalReview() {
       <div className="flex justify-between items-center text-sm font-mono text-slate-400">
         <span>Card {currentIndex + 1} / {queue.length}</span>
         {currentCard?.reps >= 3 && !isFlipped && (
-          <span className="text-amber-500 bg-blue-600 hover:bg-blue-500/10 px-2 py-1 rounded">Procedural Phase (Answer quickly)</span>
+          <span className="text-amber-500 bg-blue-500/10 px-2 py-1 rounded">Procedural Phase (Answer quickly)</span>
         )}
       </div>
 

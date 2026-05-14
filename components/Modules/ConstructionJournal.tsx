@@ -117,7 +117,7 @@ export default function ConstructionJournal() {
               setEditingId(null);
               setView('form');
             }}
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-bold hover:bg-amber-400 transition-colors"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-bold transition-colors"
           >
             + Add Construction
           </button>
@@ -330,7 +330,7 @@ export default function ConstructionJournal() {
           <div className="flex justify-end pt-4 border-t border-zinc-800">
             <button 
               onClick={handleSave}
-              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 py-3 rounded-md font-bold hover:bg-amber-400 transition-colors"
+              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 py-3 rounded-md font-bold transition-colors"
             >
               Save Construction
             </button>

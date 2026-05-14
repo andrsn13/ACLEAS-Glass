@@ -47,7 +47,7 @@ export default function Onboarding() {
             </p>
             <button 
               onClick={() => setStep(2)}
-              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-3 rounded-md font-bold hover:bg-amber-400 transition-colors"
+              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-3 rounded-md font-bold transition-colors"
             >
               Begin Setup
             </button>
@@ -159,7 +159,7 @@ export default function Onboarding() {
 
             <button 
               onClick={handleFinish}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-3 rounded-md font-bold hover:bg-amber-400 transition-colors"
+              className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-3 rounded-md font-bold transition-colors"
             >
               Start the System
             </button>

@@ -77,7 +77,7 @@ export default function DailyPipeline() {
                   onClick={() => toggleStage(stage.id)}
                   className={`px-4 py-2 rounded-md font-medium transition-colors ${
                     isComplete 
-                      ? 'bg-blue-600 hover:bg-blue-500/20 text-amber-500 border border-amber-500/50' 
+                      ? 'bg-blue-500/20 text-amber-500 border border-amber-500/50' 
                       : 'bg-zinc-800 text-slate-300 hover:bg-zinc-700'
                   }`}
                 >
@@ -113,7 +113,7 @@ export default function DailyPipeline() {
           />
           <button 
             onClick={handleEndDay}
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-2 rounded-md font-bold hover:bg-amber-400 transition-colors"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-2 rounded-md font-bold transition-colors"
           >
             End Day
           </button>

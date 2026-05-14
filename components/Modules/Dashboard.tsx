@@ -105,7 +105,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap gap-3">
           <button 
             onClick={() => setActiveModule(3)}
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-medium hover:bg-amber-400 transition-colors"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-medium transition-colors"
           >
             Log Input
           </button>

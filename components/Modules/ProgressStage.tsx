@@ -52,7 +52,7 @@ export default function ProgressStage() {
         <p className="text-slate-400">Long-term proceduralization tracking.</p>
       </header>
 
-      <div className="bg-blue-600 hover:bg-blue-500/10 border border-amber-500/30 p-8 rounded-xl text-center space-y-4">
+      <div className="bg-blue-500/10 border border-amber-500/30 p-8 rounded-xl text-center space-y-4">
         <h3 className="text-amber-500 font-mono tracking-widest text-sm uppercase">Current Mastery Stage</h3>
         <div className="text-4xl font-bold font-mono text-slate-200">{stageName}</div>
         <p className="text-slate-300 max-w-xl mx-auto">{stageDesc}</p>

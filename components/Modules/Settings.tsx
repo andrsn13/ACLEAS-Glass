@@ -97,7 +97,7 @@ export default function Settings() {
           </button>
           <button 
             onClick={() => setApiKey(localKey)}
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 rounded-md font-bold hover:bg-amber-400"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 rounded-md font-bold"
           >
             Save
           </button>

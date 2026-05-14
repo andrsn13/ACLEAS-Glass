@@ -8,9 +8,9 @@
   --color-zinc-900: rgba(255, 255, 255, 0.1);
   --color-zinc-800: rgba(255, 255, 255, 0.2);
   --color-zinc-700: rgba(255, 255, 255, 0.3);
-  --color-amber-400: #60a5fa;
-  --color-amber-500: #3b82f6;
-  --color-amber-600: #2563eb;
+  --color-amber-400: #93c5fd;
+  --color-amber-500: #60a5fa;
+  --color-amber-600: #3b82f6;
 }
 
 @layer utilities {

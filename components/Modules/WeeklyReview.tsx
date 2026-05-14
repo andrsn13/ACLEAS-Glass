@@ -113,7 +113,7 @@ export default function WeeklyReview() {
         </div>
 
         <div className="pt-4 flex justify-end">
-          <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 py-3 rounded-lg font-bold hover:bg-amber-400 transition-colors">
+          <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 py-3 rounded-lg font-bold transition-colors">
             Save Weekly Log
           </button>
         </div>

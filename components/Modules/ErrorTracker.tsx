@@ -63,7 +63,7 @@ export default function ErrorTracker() {
         {view === 'list' && (
           <button 
             onClick={() => setView('add')}
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-bold hover:bg-amber-400 transition-colors"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-bold transition-colors"
           >
             + Log Error
           </button>
@@ -108,7 +108,7 @@ export default function ErrorTracker() {
                 <tbody className="divide-y divide-zinc-800">
                   {errors.sort((a,b) => new Date(b.date).getTime() - new Date(a.date).getTime()).map(e => (
                     <tr key={e.id} className="hover:bg-zinc-800/30">
-                      <td className="p-4"><span className={`px-2 py-1 rounded font-mono text-xs ${e.type === 'D' ? 'bg-[#cf6679]/20 text-[#cf6679]' : 'bg-blue-600 hover:bg-blue-500/10 text-amber-500'}`}>Type {e.type}</span></td>
+                      <td className="p-4"><span className={`px-2 py-1 rounded font-mono text-xs ${e.type === 'D' ? 'bg-[#cf6679]/20 text-[#cf6679]' : 'bg-blue-500/10 text-amber-500'}`}>Type {e.type}</span></td>
                       <td className="p-4 text-slate-500">{new Date(e.date).toLocaleDateString()}</td>
                       <td className="p-4 text-slate-200">{e.description}</td>
                       <td className="p-4 text-slate-400 text-xs truncate max-w-[200px]">{e.repairAction}</td>
@@ -140,13 +140,13 @@ export default function ErrorTracker() {
             <div>
               <label className="block text-sm font-medium text-slate-400 mb-2">Error Type</label>
               <div className="grid grid-cols-2 gap-3">
-                <button onClick={() => handleTypeChange('A')} className={`p-3 text-left border rounded-md ${formData.type === 'A' ? 'border-amber-500 bg-blue-600 hover:bg-blue-500/10' : 'border-zinc-800 bg-zinc-950'}`}>
+                <button onClick={() => handleTypeChange('A')} className={`p-3 text-left border rounded-md ${formData.type === 'A' ? 'border-amber-500 bg-blue-500/10' : 'border-zinc-800 bg-zinc-950'}`}>
                   <strong className="block text-slate-200 font-mono">A. Retrieval Failure</strong><span className="text-xs text-slate-500">Known but inaccessible</span>
                 </button>
-                <button onClick={() => handleTypeChange('B')} className={`p-3 text-left border rounded-md ${formData.type === 'B' ? 'border-amber-500 bg-blue-600 hover:bg-blue-500/10' : 'border-zinc-800 bg-zinc-950'}`}>
+                <button onClick={() => handleTypeChange('B')} className={`p-3 text-left border rounded-md ${formData.type === 'B' ? 'border-amber-500 bg-blue-500/10' : 'border-zinc-800 bg-zinc-950'}`}>
                   <strong className="block text-slate-200 font-mono">B. Knowledge Gap</strong><span className="text-xs text-slate-500">Construction absent</span>
                 </button>
-                <button onClick={() => handleTypeChange('C')} className={`p-3 text-left border rounded-md ${formData.type === 'C' ? 'border-amber-500 bg-blue-600 hover:bg-blue-500/10' : 'border-zinc-800 bg-zinc-950'}`}>
+                <button onClick={() => handleTypeChange('C')} className={`p-3 text-left border rounded-md ${formData.type === 'C' ? 'border-amber-500 bg-blue-500/10' : 'border-zinc-800 bg-zinc-950'}`}>
                   <strong className="block text-slate-200 font-mono">C. Processing Failure</strong><span className="text-xs text-slate-500">Understood too slowly</span>
                 </button>
                 <button onClick={() => handleTypeChange('D')} className={`p-3 text-left border rounded-md ${formData.type === 'D' ? 'border-[#cf6679] bg-[#cf6679]/10' : 'border-zinc-800 bg-zinc-950'}`}>
@@ -200,7 +200,7 @@ export default function ErrorTracker() {
             <div className="pt-4 flex justify-end">
               <button 
                 onClick={handleSave}
-                className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 py-3 rounded-lg font-bold hover:bg-amber-400 transition-colors"
+                className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-8 py-3 rounded-lg font-bold transition-colors"
               >
                 Log Error
               </button>

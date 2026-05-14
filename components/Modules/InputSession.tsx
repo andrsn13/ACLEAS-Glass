@@ -124,9 +124,9 @@ export default function InputSession() {
             <div className="text-5xl font-mono tracking-wider text-amber-500">{formatTime(seconds)}</div>
             <div className="flex flex-col space-y-2">
               {!isRunning ? (
-                <button onClick={() => setIsRunning(true)} className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-bold hover:bg-amber-400 transition-colors">Start</button>
+                <button onClick={() => setIsRunning(true)} className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-2 rounded-md font-bold transition-colors">Start</button>
               ) : (
-                <button onClick={() => setIsRunning(false)} className="bg-blue-600 hover:bg-blue-500/20 text-amber-500 px-4 py-2 rounded-md font-bold hover:bg-blue-500/30 transition-colors">Pause</button>
+                <button onClick={() => setIsRunning(false)} className="bg-blue-500/20 text-amber-500 px-4 py-2 rounded-md font-bold hover:bg-blue-500/30 transition-colors">Pause</button>
               )}
               <button 
                 onClick={handleStop}
@@ -187,7 +187,7 @@ export default function InputSession() {
 
               <button 
                 onClick={saveSessionData}
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-3 rounded-md font-bold hover:bg-amber-400 transition-colors mt-4"
+                className="w-full bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-4 py-3 rounded-md font-bold transition-colors mt-4"
               >
                 Log Session
               </button>

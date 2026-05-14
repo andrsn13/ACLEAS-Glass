@@ -30,10 +30,10 @@ export default function OutputTrainer() {
       </header>
 
       <div className="flex space-x-2 border-b border-zinc-800 pb-2 overflow-x-auto">
-        <button onClick={() => setActiveTab('monologue')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'monologue' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>Monologue</button>
-        <button onClick={() => setActiveTab('retelling')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'retelling' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>Retelling</button>
-        <button onClick={() => setActiveTab('drill')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'drill' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>Transformation</button>
-        <button onClick={() => setActiveTab('constraint')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'constraint' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>Constraint</button>
+        <button onClick={() => setActiveTab('monologue')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'monologue' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>Monologue</button>
+        <button onClick={() => setActiveTab('retelling')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'retelling' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>Retelling</button>
+        <button onClick={() => setActiveTab('drill')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'drill' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>Transformation</button>
+        <button onClick={() => setActiveTab('constraint')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'constraint' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>Constraint</button>
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl min-h-[400px]">
@@ -76,7 +76,7 @@ export default function OutputTrainer() {
              <select className="w-full bg-zinc-950 border border-zinc-800 rounded-md py-2 px-3 text-slate-200 focus:outline-none focus:border-amber-500">
                 {constructions.map(c => <option key={c.id}>{c.construction}</option>)}
              </select>
-             <div className="space-y-2 text-sm text-amber-500/80 bg-blue-600 hover:bg-blue-500/10 p-4 rounded-lg">
+             <div className="space-y-2 text-sm text-amber-500/80 bg-blue-500/10 p-4 rounded-lg">
                 <p>1. Change subject (I → She → They)</p>
                 <p>2. Change tense frame</p>
                 <p>3. Negate it</p>

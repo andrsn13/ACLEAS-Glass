@@ -47,15 +47,15 @@ export default function Pronunciation() {
       </header>
 
       <div className="flex space-x-2 border-b border-zinc-800 pb-2 overflow-x-auto">
-        <button onClick={() => setActiveTab('shadowing')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'shadowing' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>1. Shadowing</button>
-        <button onClick={() => setActiveTab('minimal')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'minimal' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>2. Minimal Pairs</button>
-        <button onClick={() => setActiveTab('reduction')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'reduction' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800'}`}>3. Connected Speech</button>
+        <button onClick={() => setActiveTab('shadowing')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'shadowing' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>1. Shadowing</button>
+        <button onClick={() => setActiveTab('minimal')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'minimal' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>2. Minimal Pairs</button>
+        <button onClick={() => setActiveTab('reduction')} className={`px-4 py-2 rounded-t-lg font-medium whitespace-nowrap ${activeTab === 'reduction' ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-xl' : 'text-slate-400 hover:bg-zinc-800 hover:text-slate-200'}`}>3. Connected Speech</button>
       </div>
 
       <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-xl min-h-[400px]">
         {activeTab === 'shadowing' && (
           <div className="space-y-6 animate-in fade-in">
-            <div className="bg-blue-600 hover:bg-blue-500/10 border border-amber-500/30 p-4 rounded-lg text-amber-500/90 text-sm space-y-2">
+            <div className="bg-blue-500/10 border border-amber-500/30 p-4 rounded-lg text-amber-500/90 text-sm space-y-2">
               <p><strong>INSTRUCTIONS:</strong> Play your audio source. Repeat what you hear simultaneously or with a 1-second delay. Do not pause the audio.</p>
               <p><strong>GESTURE HINT:</strong> For action words, mirror the speaker&apos;s implied physical motion while shadowing.</p>
             </div>
