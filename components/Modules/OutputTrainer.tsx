@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useAppContext } from '@/lib/context';
 import { toast } from '@/lib/toast';
+import MonologueRecorder from './MonologueRecorder';
 
 export default function OutputTrainer() {
   const { getTodaySession, updateTodaySession, constructions } = useAppContext();
@@ -10,16 +11,32 @@ export default function OutputTrainer() {
 
   const [activeTab, setActiveTab] = useState<'monologue'|'retelling'|'drill'|'constraint'>('monologue');
   const [minutes, setMinutes] = useState(5);
+  const [monologueTopic, setMonologueTopic] = useState('Your Day');
   
-  // Minimal state for logging
-  const handleLogSpeak = (mins: number) => {
+  const handleLogSpeak = async (mins: number) => {
     updateTodaySession({ speakingMinutes: session.speakingMinutes + mins });
     toast(`Logged ${mins} minutes of speaking.`);
+    try {
+      const { syncToDocs } = await import('@/lib/useDocsSync');
+      await syncToDocs('logSessionText', {
+        title: `Output Trainer: Speak (${activeTab})`,
+        details: 'Self-guided practice',
+        duration: mins
+      });
+    } catch (e) {}
   };
 
-  const handleLogWrite = (mins: number) => {
+  const handleLogWrite = async (mins: number) => {
     updateTodaySession({ writingMinutes: session.writingMinutes + mins });
     toast(`Logged ${mins} minutes of writing.`);
+    try {
+      const { syncToDocs } = await import('@/lib/useDocsSync');
+      await syncToDocs('logSessionText', {
+        title: `Output Trainer: Write (${activeTab})`,
+        details: 'Self-guided practice',
+        duration: mins
+      });
+    } catch (e) {}
   };
 
   return (
@@ -41,7 +58,11 @@ export default function OutputTrainer() {
           <div className="space-y-6 animate-in fade-in">
             <h3 className="text-xl font-mono text-slate-200">Activity A: Monologue Timer</h3>
             <p className="text-slate-400">Real-time retrieval under pressure.</p>
-            <select className="w-full bg-zinc-950 border border-zinc-800 rounded-md py-2 px-3 text-slate-200 focus:outline-none focus:border-amber-500">
+            <select 
+              value={monologueTopic} 
+              onChange={(e) => setMonologueTopic(e.target.value)}
+              className="w-full bg-zinc-950 border border-zinc-800 rounded-md py-2 px-3 text-slate-200 focus:outline-none focus:border-amber-500"
+            >
               <option>Your Day</option>
               <option>Opinion</option>
               <option>Summary</option>
@@ -49,11 +70,7 @@ export default function OutputTrainer() {
               <option>Argument</option>
               <option>Free</option>
             </select>
-            <div className="flex items-center space-x-4">
-              <label className="text-sm font-bold">Minutes:</label>
-              <input type="number" value={minutes} onChange={(e) => setMinutes(Number(e.target.value))} className="w-20 bg-zinc-950 border border-zinc-800 rounded-md py-1 px-3 text-center" />
-            </div>
-            <button onClick={() => handleLogSpeak(minutes)} className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl px-6 py-3 rounded-lg font-bold">Log Completed Monologue</button>
+            <MonologueRecorder topic={monologueTopic} onLogRun={handleLogSpeak} />
           </div>
         )}
 

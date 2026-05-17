@@ -43,13 +43,28 @@ export default function InputSession() {
     }
   };
 
-  const saveSessionData = () => {
+  const saveSessionData = async () => {
     const minLogged = Math.round(seconds / 60);
+    const newNotes = localNote ? `Source: ${sourceData.title || sourceData.type}\nSpeed: ${speedNote}\nComprehension: ${rating}%\n${localNote}` : `Source: ${sourceData.title || sourceData.type}\nSpeed: ${speedNote}\nComprehension: ${rating}%`;
+    const fullNotes = session.sessionNotes + (session.sessionNotes ? `\n\n` : '') + newNotes;
+
     updateTodaySession({ 
       inputMinutes: session.inputMinutes + minLogged,
       inputComprehension: rating, // Just storing latest for now
-      sessionNotes: session.sessionNotes + (localNote ? `\n\nInput Session Notes:\n${localNote}` : '')
+      sessionNotes: fullNotes
     });
+
+    try {
+      const { syncToDocs } = await import('@/lib/useDocsSync');
+      await syncToDocs('logSessionText', {
+        title: `Input Immersion`,
+        details: newNotes,
+        duration: minLogged
+      });
+    } catch (err) {
+      console.warn(err);
+    }
+
     setSeconds(0);
     setShowRating(false);
     setLocalNote('');
