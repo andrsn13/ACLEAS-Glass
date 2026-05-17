@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useAppContext } from '@/lib/context';
 import { toast } from '@/lib/toast';
 import confetti from 'canvas-confetti';
+import { SessionLog } from '@/lib/types';
 
 const STAGES = [
   { id: 1, name: 'Input Immersion', min: '60 min input logged', key: 'inputMinutes', target: 60 },
@@ -20,6 +21,7 @@ export default function DailyPipeline() {
   const session = getTodaySession();
   const [sleepInput, setSleepInput] = useState('');
   const [viewHistory, setViewHistory] = useState(false);
+  const [selectedSession, setSelectedSession] = useState<SessionLog | null>(null);
 
   const toggleStage = (stageId: number) => {
     const isComplete = session.pipelineStagesCompleted.includes(stageId);
@@ -86,7 +88,14 @@ export default function DailyPipeline() {
             <p className="text-slate-400">No history available yet.</p>
           ) : (
             history.map((s) => (
-              <div key={s.id} className="bg-zinc-900 border border-zinc-800 p-5 rounded-xl space-y-2">
+              <div
+                key={s.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => setSelectedSession(s)}
+                onKeyDown={(e) => { if (e.key === 'Enter') setSelectedSession(s); }}
+                className="bg-zinc-900 border border-zinc-800 p-5 rounded-xl space-y-2 cursor-pointer hover:shadow-lg transition-shadow"
+              >
                 <div className="flex justify-between items-center mb-2">
                   <h3 className="font-mono text-lg text-amber-500">{new Date(s.date).toLocaleDateString()}</h3>
                   <span className="text-sm font-mono bg-zinc-800 px-2 py-1 rounded text-slate-300">
@@ -121,6 +130,82 @@ export default function DailyPipeline() {
             ))
           )}
         </div>
+
+        {selectedSession && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="max-w-2xl w-full bg-zinc-900 border border-zinc-800 rounded-xl p-6 mx-4 relative">
+              <button
+                onClick={() => setSelectedSession(null)}
+                className="absolute top-3 right-3 text-slate-400 hover:text-slate-200"
+                aria-label="Close summary"
+              >
+                ✕
+              </button>
+
+              <header className="mb-4">
+                <h3 className="text-2xl font-mono text-amber-500">{new Date(selectedSession.date).toLocaleDateString()}</h3>
+                <p className="text-slate-400 text-sm">{selectedSession.pipelineStagesCompleted.length}/{STAGES.length} stages completed</p>
+              </header>
+
+              <div className="grid grid-cols-2 gap-4 text-sm mb-4">
+                <div>
+                  <span className="text-slate-500 block">Input</span>
+                  <span className="text-slate-300">{selectedSession.inputMinutes}m</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block">Output</span>
+                  <span className="text-slate-300">S:{selectedSession.speakingMinutes}m W:{selectedSession.writingMinutes}m</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block">Constructions</span>
+                  <span className="text-slate-300">{selectedSession.constructionsCaptured} Added</span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block">Sleep</span>
+                  <span className="text-slate-300">{selectedSession.sleepHours ? selectedSession.sleepHours + 'h' : 'Not Logged'}</span>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <h4 className="text-xs uppercase text-slate-500 mb-2">Stages</h4>
+                <ul className="space-y-2">
+                  {STAGES.map((stage) => {
+                    const done = selectedSession.pipelineStagesCompleted.includes(stage.id);
+                    return (
+                      <li key={stage.id} className={`flex items-center ${done ? 'text-amber-400' : 'text-slate-400'}`}>
+                        <span className={`w-6 h-6 mr-3 flex items-center justify-center rounded-full ${done ? 'bg-amber-500 text-zinc-900' : 'bg-zinc-800'}`}>{done ? '✓' : stage.id}</span>
+                        <div>
+                          <div className="font-mono">{stage.name}</div>
+                          <div className="text-xs text-slate-500">{done ? 'Completed' : 'Not completed'}</div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+
+              <div className="mt-6">
+                <h4 className="text-xs uppercase text-slate-500 mb-2">Notes</h4>
+                <div className="bg-zinc-950 border border-zinc-800 rounded p-4 text-slate-300 text-sm whitespace-pre-wrap">
+                  {selectedSession.sessionNotes || 'No notes for this day.'}
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-end space-x-3">
+                <button
+                  onClick={() => {
+                    const summary = `Date: ${selectedSession.date}\nStages: ${selectedSession.pipelineStagesCompleted.length}/${STAGES.length}\nInput: ${selectedSession.inputMinutes}m\nSpeaking: ${selectedSession.speakingMinutes}m\nNotes: ${selectedSession.sessionNotes || ''}`;
+                    navigator.clipboard?.writeText(summary).then(() => toast('Summary copied to clipboard'));
+                  }}
+                  className="bg-zinc-800 px-4 py-2 rounded text-slate-300 hover:bg-zinc-700"
+                >
+                  Copy Summary
+                </button>
+                <button onClick={() => setSelectedSession(null)} className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded">Close</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

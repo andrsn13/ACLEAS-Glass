@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     let currentTabId = '';
     let currentTabIndex = 0;
 
-    const existingTab = tabs.find(t => t.tabProperties?.title === date);
+    const existingTab = tabs.find((t: any) => t.tabProperties?.title === date);
     if (existingTab) {
       currentTabId = existingTab.tabProperties?.tabId!;
       currentTabIndex = existingTab.tabProperties?.index!;
@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
       } else {
          // Fallback if not returned
          const docRes2 = await docs.documents.get({ documentId: docId, includeTabsContent: true });
-         const newTab = docRes2.data.tabs?.find(t => t.tabProperties?.title === date);
+         const newTab = docRes2.data.tabs?.find((t: any) => t.tabProperties?.title === date);
          currentTabId = newTab?.tabProperties?.tabId || '';
       }
     }
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
     
     let endIndex = 1; // Default
     if (freshDoc.data.tabs) {
-       const tab = freshDoc.data.tabs.find(t => t.tabProperties?.tabId === currentTabId);
+      const tab = freshDoc.data.tabs.find((t: any) => t.tabProperties?.tabId === currentTabId);
        if (tab && tab.documentTab && tab.documentTab.body && tab.documentTab.body.content) {
           const content = tab.documentTab.body.content;
           endIndex = content[content.length - 1].endIndex! - 1; 
